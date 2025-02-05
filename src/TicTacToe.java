@@ -19,6 +19,7 @@ public class TicTacToe {
     String currentPlayer = playerX; 
 
     boolean gameOver = false; 
+    int turns = 0; 
 
     
     TicTacToe() {
@@ -87,9 +88,47 @@ public class TicTacToe {
                 return; 
             }
         }
+
+        //vertical 
+        for (int c = 0; c < 3; c++) {
+            if (board[0][c].getText() == "") continue; 
+
+            if (board[0][c].getText() == board[1][c].getText() && 
+                board[1][c].getText() == board[2][c].getText()) {
+                    for (int i = 0; i < 3; i++) {
+                        setWinner(board[i][c]);
+                    }
+                    gameOver = true; 
+                    return; 
+                }
+        }
+        //diagonally
+        if (board[0][0].getText() == board[1][1].getText() &&
+            board[1][1].getText() == board[2][2].getText() &&
+            board[0][0].getText() != "") {
+                for (int i = 0; i <3; i++) {
+                    setWinner(board[i][i]); 
+                }
+                gameOver = true; 
+                return; 
+            }
+
+        if (board[0][2].getText() == board[1][1].getText() &&
+            board[1][1].getText() == board[2][0].getText() &&
+            board[0][2].getText() != "") {
+                setWinner(board[0][2]); 
+                setWinner(board[1][1]);
+                setWinner(board[2][0]);
+                gameOver = true; 
+                return; 
+            }
     }
 
-    void setWinner(JButton) {
-        
+    void setWinner(JButton tile) {
+        tile.setForeground(new Color(173, 216, 230));
+        tile.setBackground(Color.white); 
+        textLabel.setText(currentPlayer + " is the winner!"); 
+
+
     }
 }
